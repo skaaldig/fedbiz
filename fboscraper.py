@@ -6,6 +6,7 @@ from search import select_document_scope
 from search import submit_form
 from search import select_codes
 from search import enter_date_ranges
+from search import toggle_recovery_reinvestment_act
 from opportunity import get_opportunities
 
 class FedBizOpps:
@@ -19,6 +20,7 @@ class FedBizOpps:
                  naics_codes=None,
                  class_codes=None,
                  ja_codes=None,
+                 recovery_and_reinvestment=False,
                  fair_opportunity_codes=None,
                  posted_range_start=None,
                  posted_range_end=None,
@@ -37,6 +39,7 @@ class FedBizOpps:
         self.naics_codes = naics_codes
         self.class_codes = class_codes
         self.ja_codes = ja_codes
+        self.recovery_and_reinvestment = recovery_and_reinvestment
         self.fair_opportunity_codes = fair_opportunity_codes
         self.posted_range_start = posted_range_start
         self.posted_range_end = posted_range_end
@@ -80,6 +83,9 @@ class FedBizOpps:
         if self.fair_opportunity_codes:
             select_codes(self.driver, self.fair_opportunity_codes, 'fair_opportunity')
 
+        if self.recovery_and_reinvestment:
+            toggle_recovery_reinvestment_act(self.driver)
+
         if self.posted_range_start or self.posted_range_end:
             enter_date_ranges(
                 self.driver,
@@ -113,3 +119,4 @@ class FedBizOpps:
     def scrape_opportunities(self):
         self._search()
         self.opportunities = get_opportunities(self.driver)
+

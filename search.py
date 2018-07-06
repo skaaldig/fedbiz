@@ -1,4 +1,3 @@
-import re
 from util import remove_special
 from util import format_ja_codes
 from util import format_class_codes
@@ -54,14 +53,6 @@ def enter_zipcodes(driver, zipcodes):
 
 
 def get_codes(driver, code_type):
-    """Scrapes FBO's Advanced Search page for code numbers/names 
-    in the label contents: 
-        e.g: <label>111 -- Crop Production</label>
-        (In this case the three digit code)
-
-    Grabs & creates tuple of input field values + names for elements corresponding to those codes,
-    for use in 
-    """
     soup = BeautifulSoup(driver.page_source, 'html.parser')
 
     if code_type.lower() == 'set_aside':
@@ -163,3 +154,12 @@ def enter_date_ranges(driver, start_date, end_date, date_type):
 def submit_form(driver):
     xpath = "//input[@name='dnf_opt_submit']"
     driver.find_element_by_xpath(xpath).click()
+
+
+def toggle_recovery_reinvestment_act(driver):
+    xpath = "//input[@alt='Recovery and Reinvestment Act Action Yes']"
+    driver.find_element_by_xpath(xpath).click()
+
+
+
+
