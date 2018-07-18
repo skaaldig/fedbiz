@@ -53,6 +53,15 @@ def enter_zipcodes(driver, zipcodes):
 
 
 def get_codes(driver, code_type):
+    """Creates a dictionary to be used by select_codes to select
+    codes using their human readable id as an argument (e.g 111110)
+
+    <label>111 -- Crop Production: 111110 -- Soybean Farming</label>
+
+    input values and names for code elements are used to ensure
+    correct corresponding code is selected.
+
+     """
     soup = BeautifulSoup(driver.page_source, 'html.parser')
 
     if code_type.lower() == 'set_aside':
@@ -92,7 +101,7 @@ def get_codes(driver, code_type):
 
     page_labels = label_edit.find_all('label')
     labels = [editor(label.text) for label in page_labels]
-    inputs = [(element['value'], element['name']) for element in label_edit.find_all('input')]
+    inputs = [( element['name'], element['value']) for element in label_edit.find_all('input')]
 
     return dict(zip(labels, inputs))
 
@@ -101,12 +110,12 @@ def select_codes(driver, codes, code_type=None):
     page_codes = get_codes(driver, code_type)
     print(page_codes)
     if isinstance(codes, str):
-        xpath = f"//input[@name='{page_codes[codes][1]}'][@value='{page_codes[codes][0]}']"
+        xpath = f"//input[@name='{page_codes[codes][0]}'][@value='{page_codes[codes][1]}']"
         driver.find_element_by_xpath(xpath).click()
     else:
         for code in codes:
             if code in page_codes:
-                xpath = f"//input[@name='{page_codes[code][1]}'][@value='{page_codes[code][0]}']"
+                xpath = f"//input[@name='{page_codes[code][0]}'][@value='{page_codes[code][1]}']"
                 driver.find_element_by_xpath(xpath).click()
 
 
@@ -159,7 +168,3 @@ def submit_form(driver):
 def toggle_recovery_reinvestment_act(driver):
     xpath = "//input[@alt='Recovery and Reinvestment Act Action Yes']"
     driver.find_element_by_xpath(xpath).click()
-
-
-
-
