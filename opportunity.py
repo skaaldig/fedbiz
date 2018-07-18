@@ -64,8 +64,7 @@ def get_total_num_pages(soup): # needs re-evaluation
 
 
 def get_opportunities(driver):
-    r = driver.page_source
-    soup = BeautifulSoup(r, 'html.parser')
+    soup = BeautifulSoup(driver.page_source, 'html.parser')
     opportunities = rows_to_dictionary(soup)
 
     if get_total_num_pages(soup):
@@ -75,5 +74,7 @@ def get_opportunities(driver):
             r = driver.page_source
             soup = BeautifulSoup(r, 'html.parser')
             opportunities += rows_to_dictionary(soup)
-    print(opportunities)
+
+    #need create handling for searches with no additional pages.
+
     return opportunities
