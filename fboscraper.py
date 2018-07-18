@@ -1,3 +1,5 @@
+import pandas as pd
+from datetime import datetime
 from selenium import webdriver
 from search import select_posted_date
 from search import enter_zipcodes
@@ -8,6 +10,7 @@ from search import select_codes
 from search import enter_date_ranges
 from search import toggle_recovery_reinvestment_act
 from opportunity import get_opportunities
+
 
 class FedBizOpps:
 
@@ -120,3 +123,7 @@ class FedBizOpps:
         self._search()
         self.opportunities = get_opportunities(self.driver)
 
+    def export_to_csv(self):
+        date_stamp = str(datetime.today().strftime('%m-%d-%Y'))
+        df = pd.DataFrame.from_dict(self.opportunities)
+        df.to_csv(f'Opportunities {date_stamp}.csv')
