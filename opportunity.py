@@ -46,19 +46,20 @@ def rows_to_dictionary(soup):
     return opportunities
 
 
-def get_total_num_pages(soup): # needs re-evaluation 
-
+def get_total_num_pages(soup):
     try:
-        pages = soup.find('a', {'title': 'last page'}).contents
-        max_pages = pages[0].strip('[]')
-        total_pages = [str(page_num) for page_num in range(2, int(max_pages) + 1)]
-        return total_pages
-    except AttributeError:
-        next_page = soup.find('a', {'title': 'next page'})
-        last_page = next_page.find_previous_sibling('a').contents
-        max_pages = last_page[0].strip('[]')
-        total_pages = [str(page_num) for page_num in range(2, int(max_pages) + 1)]
-        return total_pages
+        try:
+            last_page = soup.find('a', {'title': 'last page'}).contents
+            max_pages = last_page[0].strip('[]')
+            total_pages = [str(page_num) for page_num in range(2, int(max_pages) + 1)]
+            return total_pages
+
+        except AttributeError:
+            next_page = soup.find('a', {'title': 'next page'})
+            last_page = next_page.find_previous_sibling('a').contents
+            max_pages = last_page[0].strip('[]')
+            total_pages = [str(page_num) for page_num in range(2, int(max_pages) + 1)]
+            return total_pages
     except AttributeError:
         return False
 
@@ -74,7 +75,5 @@ def get_opportunities(driver):
             r = driver.page_source
             soup = BeautifulSoup(r, 'html.parser')
             opportunities += rows_to_dictionary(soup)
-
-    #need create handling for searches with no additional pages.
-
+    print(opportunities)
     return opportunities
