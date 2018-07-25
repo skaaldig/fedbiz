@@ -1,8 +1,10 @@
 import re
 
 
-def remove_special(text):
-    return re.sub('[^A-Za-z0-9]+', '_', text).strip('_').lower()
+def remove_special(text, length=3):
+    full_text = re.sub('[^A-Za-z0-9]+', '_', text).strip('_').lower()
+    three_words = '_'.join(full_text.split('_')[:length])
+    return three_words
 
 
 def format_ja_codes(code):
@@ -26,9 +28,8 @@ def format_naics_code(code):
 
 def format_fair_codes(code):
     code = re.sub('-+', ' ', str(code))
-    class_code = re.findall(r'^((?:\S+\s+){2}\S+).*', str(code))
-    if class_code:
-        return re.sub('[^A-Za-z0-9]+', '_', str(class_code)).strip('_').lower()
-
+    fair_code = code.split(' ')
+    if len(fair_code) > 2:
+        return remove_special(' '.join(fair_code), length=3)
     else:
-        return remove_special(code)
+        return remove_special(code, length=len(fair_code))
