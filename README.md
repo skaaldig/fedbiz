@@ -7,10 +7,10 @@ From inside the project folder.
 ```
 pip install requirements.txt
 ```
-This project also requires the installation of the Mozilla Geckodriver: Download Below.
+This project also requires the installation of the Mozilla Geckodriver: Download Below.  
 https://github.com/mozilla/geckodriver/releases
 
-Instructions for installing this driver can be found under the Selenium section of the below ReadMe.
+Instructions for installing this driver can be found under the Selenium section of the below ReadMe.  
 https://github.com/mozilla/geckodriver
 
 
