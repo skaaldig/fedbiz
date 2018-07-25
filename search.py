@@ -54,7 +54,8 @@ def enter_zipcodes(driver, zipcodes):
 
 def get_codes(driver, code_type):
     """Creates a dictionary to be used by select_codes to select
-    codes using their human readable id as an argument (e.g 111110)
+    codes using their human readable id as an argument (e.g 111110
+    from the below label)
 
     <label>111 -- Crop Production: 111110 -- Soybean Farming</label>
 
@@ -68,6 +69,13 @@ def get_codes(driver, code_type):
         label_edit = soup.find(
             'div',
             {'id': 'dnf_class_values_procurement_notice__set_aside____widget'}
+        ).table
+        editor = remove_special
+
+    elif code_type.lower() == 'procurement_type':
+        label_edit = soup.find(
+            'div',
+            {'id': 'dnf_class_values_procurement_notice__procurement_type____widget'}
         ).table
         editor = remove_special
 
@@ -108,7 +116,7 @@ def get_codes(driver, code_type):
 
 def select_codes(driver, codes, code_type=None):
     page_codes = get_codes(driver, code_type)
-    print(page_codes)
+
     if isinstance(codes, str):
         xpath = f"//input[@name='{page_codes[codes][0]}'][@value='{page_codes[codes][1]}']"
         driver.find_element_by_xpath(xpath).click()

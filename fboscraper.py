@@ -20,6 +20,7 @@ class FedBizOpps:
                  states=None,
                  scope=None,
                  set_aside=None,
+                 procurement_type=None,
                  naics_codes=None,
                  class_codes=None,
                  ja_codes=None,
@@ -39,6 +40,7 @@ class FedBizOpps:
         self.states = states
         self.scope = scope
         self.set_aside = set_aside
+        self.procurement_type = procurement_type
         self.naics_codes = naics_codes
         self.class_codes = class_codes
         self.ja_codes = ja_codes
@@ -73,6 +75,9 @@ class FedBizOpps:
 
         if self.set_aside:
             select_codes(self.driver, self.set_aside, 'set_aside')
+
+        if self.procurement_type:
+            select_codes(self.driver, self.procurement_type, 'procurement_type')
 
         if self.naics_codes:
             select_codes(self.driver, self.naics_codes, 'naics_codes')
