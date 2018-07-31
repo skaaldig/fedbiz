@@ -40,6 +40,7 @@ Much like JA Codes, you only need enter the Fair Opportunity type as a string or
 FedBizOpps(fair_opportunity_codes='other_statutory_authority')
 or
 FedBizOpps(fair_opportunity_codes=['follow_on_delivery', 'minimum_guarantee'])
+```
 
 ###### Set Aside Codes:
 ```
