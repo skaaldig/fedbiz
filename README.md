@@ -41,3 +41,19 @@ FedBizOpps(fair_opportunity_codes='other_statutory_authority')
 or
 FedBizOpps(fair_opportunity_codes=['follow_on_delivery', 'minimum_guarantee'])
 
+###### Set Aside Codes:
+```
+FedBizOpps(set_aside='competitive_8_a')
+or
+FedBizOpps(set_aside=['total_hbcu_mi', 'very_small_business', 'partial_hbcu_mi')
+```
+
+###### Classification Codes:
+Accepts the number or letter prefix for the class codes in string or list of string form. 
+```
+FedBizOpps(class_code='R')
+or
+FedBizOpps(class_code=['S', 'X', '1', '3', '94'])
+```
+
+
