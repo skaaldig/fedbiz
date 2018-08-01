@@ -33,24 +33,28 @@ or
 FedBizOpps(ja_codes=['far_6_302_4', 'far_6_302_5', 'far_6_302_3'])
 ```
 
-###### Fair Opportunity / Limited Sources Justification Authority:
-Much like JA Codes, you only need enter the Fair Opportunity type as a string or list of strings. If type is longer than a single word, only up to the first three words are required (subsituting underscores for spaces). 
+### Longer Code Arguments:
+Much like JA Codes, for the below code types if the code on the search form is longer than a single word, only up to the first three words are required. Spaces and special characters must be substituted for underscores. 
 
+###### Fair Opportunity / Limited Sources Justification Authority:
 ```
 FedBizOpps(fair_opportunity_codes='other_statutory_authority')
 or
 FedBizOpps(fair_opportunity_codes=['follow_on_delivery', 'minimum_guarantee'])
 ```
-
 ###### Set Aside Codes:
 ```
 FedBizOpps(set_aside='competitive_8_a')
 or
 FedBizOpps(set_aside=['total_hbcu_mi', 'very_small_business', 'partial_hbcu_mi')
 ```
-
+### Opportunity/Procurement Type:
+```
+FedBizOpps(procurement_type='presolicitation')
+or
+FedBizOpps(procurement_type=['combined_synopsis_solicitation', 'fair_opportunity_limited'])
+```
 ###### Classification Codes:
-Accepts the number or letter prefix for the class codes in string or list of string form. 
 ```
 FedBizOpps(class_code='R')
 or
