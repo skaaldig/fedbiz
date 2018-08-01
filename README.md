@@ -16,7 +16,13 @@ https://github.com/mozilla/geckodriver
 
 Usage:
 ------
-#### Search Form Codes:
+# Example Use:
+```
+scraper = FedBizOpps(naics_codes=['111110', '113'], states='NC', posted='90')
+scraper.scrape_opportunities()
+```
+
+# Search Form Codes:
 ###### NAICS Codes: 
 Six digit NAICS numbers and three digit prefixes can be entered as a string or list of strings. 
 ```
@@ -33,7 +39,7 @@ or
 FedBizOpps(ja_codes=['far_6_302_4', 'far_6_302_5', 'far_6_302_3'])
 ```
 
-### Longer Code Arguments:
+#### Longer Code Arguments:
 Much like JA Codes, for the below code types if the code on the search form is longer than a single word, only up to the first three words are required. Spaces and special characters must be substituted for underscores. 
 
 ###### Fair Opportunity / Limited Sources Justification Authority:
